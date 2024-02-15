@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "SortData",
+            "request": "launch",
+            "mainClass": "SortData",
+            "projectName": "ads2_assessed_exercise_1_66900ae6"
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
