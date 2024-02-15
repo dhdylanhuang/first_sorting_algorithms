@@ -1,5 +1,9 @@
 public class QuickSort {
 
+    //Part 1 c)
+    static int gtPivot = 0; 
+    static int ltPivot = 0;
+
     //Part 1 a) QUICKSORT
     public int[] quickSort(int[] arr, int low, int high) {
         if(low<high){
@@ -29,8 +33,8 @@ public class QuickSort {
     public int[] quickSortThreeWay(int[] arr, int low, int high) {
         if (low < high) {
             int[] pivotIndex = partitionThreeWay(arr, low, high);
-            quickSortThreeWay(arr, low, pivotIndex[1]);
-            quickSortThreeWay(arr, pivotIndex[0], high);
+            quickSortThreeWay(arr, low, pivotIndex[0]);
+            quickSortThreeWay(arr, pivotIndex[1], high);
         }
         return arr;
     }
@@ -64,51 +68,59 @@ public class QuickSort {
     }
 
     //Part 1 c) PARTITION for 3-WAY-QUICKSORT
-    public int[] partitionThreeWay(int[] arr, int low, int high) {
-        int ltPivot = low - 1;
-        int gtPivot = high;
-        int p = low-1;
-        int q = high;
+    public int[] partitionThreeWay(int arr[], int low, int high) {
+
+        gtPivot = low - 1; ltPivot = high;
+        int p = low - 1, q = high;
         int pivot = arr[high];
-        while(true) {
-            //Starting on the left, find the firt element greater or equal than the pivot
-            while(arr[++ltPivot]<pivot);
-            //Starting on the right, find the firt element smaller or equal than the pivot
-            while(pivot<arr[--gtPivot]){
-                if(gtPivot==low){
+    
+        while (true)
+        {
+        //Centre to Left, find the firt element greater or equal than the pivot
+            while (arr[++gtPivot] < pivot);
+    
+            //Centre to Right, find the firt element smaller or equal than the pivot
+            while (pivot < arr[--ltPivot]){
+                if (ltPivot == low){
                     break;
                 }
             }
             //If the two pivots cross then terminate
-            if(ltPivot>=gtPivot){
+            if (gtPivot >= ltPivot){
                 break;
             }
+    
             //Swap so smaller goes on the left, larger on the right
-            swap(arr, ltPivot,gtPivot);
-            //Move all the same occurences of the pivot to the beginning of the array and keep count using p
-            if(arr[ltPivot]==pivot){
+            swap(arr,gtPivot,ltPivot);
+    
+            ///Move all the same occurences of the pivot to the beginning of the array and keep count using p
+            if (arr[gtPivot] == pivot){
                 p++;
-                swap(arr, ltPivot, p);
+                swap(arr, gtPivot, p);
             }
+    
             //Move all the same occurences of the pivot to the end of the array and keep count using q
-            if(arr[gtPivot]==pivot){
+            if (arr[ltPivot] == pivot){
                 q--;
-                swap(arr, q, gtPivot);
+                swap(arr, ltPivot, q);
             }
         }
+    
         //Move pivot element to correct position
-        swap(arr, ltPivot, high);
-
+        swap(arr, gtPivot, high);
+    
         //Move all same occurences (on left side) to adjacent arr[i]
-        gtPivot = ltPivot-1;
-        for(int r=low; r<p; r++){
-            swap(arr, r, gtPivot);
+        ltPivot = gtPivot - 1;
+        for (int r=low; r<p; r++, ltPivot--){
+            swap(arr, r, ltPivot);
         }
-        //Move all same occurences (on right side) to adjacent arr[i]
-        ltPivot += 1;
-        for(int r=high-1; r>q; r++, ltPivot--){
-            swap(arr, ltPivot, r);
+    
+       //Move all same occurences (on right side) to adjacent arr[i]
+        gtPivot = gtPivot + 1;
+        for (int r=high - 1; r>q; r--, gtPivot++){
+            swap(arr, gtPivot, r);
         }
+
         return new int[] {ltPivot, gtPivot};
     }
     
