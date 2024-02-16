@@ -14,7 +14,7 @@ public class QuickSort extends SortingAlgorithms {
         return arr;
     }
 
-    //Part 1 b) QUICKSORT variant that returns without sorting below a threshold k
+    //Part 1 b) QUICKSORT variant that return s without sorting below a threshold k
     // Then uses INSERTION-SORT to sort the entire nearly sorted array.
     public int[] quickSortWithInsertion(int[] arr, int low, int high, int k) {
         if (low < high) {

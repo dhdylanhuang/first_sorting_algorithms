@@ -66,7 +66,7 @@ public class SortingAlgorithms {
         return a;
     }
 
-    public static void merge(int[] A, int p, int q, int r) {
+    public void merge(int[] A, int p, int q, int r) {
         int n1 = q - p + 1;
         int n2 = r - q;
     

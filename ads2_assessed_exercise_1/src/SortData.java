@@ -8,7 +8,12 @@ import java.util.Scanner;
 public class SortData {
 
     static String filePath = "ads2_assessed_exercise_1/data/";
+    //static String fileName = "Bad.txt";
     static String fileName = "dutch.txt";
+    //static String fileName = "int20k.txt";
+    //static String fileName = "int500k.txt";
+    //static String fileName = "int1000.txt";
+    //static String fileName = "intBig.txt";
     
     static QuickSort quick = new QuickSort();
     static SortingAlgorithms sort = new SortingAlgorithms();
@@ -22,6 +27,7 @@ public static void main(String[] args) throws Exception {
     int r = originaFile.length-1;
 
     //QUICKSORT
+    System.out.println(originaFile.length);
     int[] quickSortFile = Arrays.copyOf(originaFile, originaFile.length);
     long startTimeQuickSort = System.currentTimeMillis();
     quick.quickSort(quickSortFile, 0, r);
@@ -30,12 +36,20 @@ public static void main(String[] args) throws Exception {
     System.out.println("Is sorted: " + isSorted(quickSortFile));
 
     // QUICK SORT WITH INSERTION
-    int[] quickSortWithInsertionList = Arrays.copyOf(originaFile, originaFile.length);
-    long startTimeQuickSortWithInsertion = System.currentTimeMillis(); 
-    quick.quickSortWithInsertion(quickSortWithInsertionList, 0, r, 500);
-    long endTimeQuickSortWithInsertion = System.currentTimeMillis();
-    System.out.println("QUICKSORT-WITH-INSERTION: " + (endTimeQuickSortWithInsertion - startTimeQuickSortWithInsertion + "ms with k at 500 for " + fileName));
-    System.out.println("Is sorted: " + isSorted(quickSortWithInsertionList));
+    int[] quickSortWithInsertionListLowK = Arrays.copyOf(originaFile, originaFile.length);
+    long startTimeQuickSortWithInsertionLowK = System.currentTimeMillis(); 
+    quick.quickSortWithInsertion(quickSortWithInsertionListLowK, 0, r, 100);
+    long endTimeQuickSortWithInsertionLowK = System.currentTimeMillis();
+    System.out.println("QUICKSORT-WITH-INSERTION: " + (endTimeQuickSortWithInsertionLowK - startTimeQuickSortWithInsertionLowK + "ms with k at 100 for " + fileName));
+    System.out.println("Is sorted: " + isSorted(quickSortWithInsertionListLowK));
+
+    // QUICK SORT WITH INSERTION
+    int[] quickSortWithInsertionListHighK = Arrays.copyOf(originaFile, originaFile.length);
+    long startTimeQuickSortWithInsertionHighK = System.currentTimeMillis(); 
+    quick.quickSortWithInsertion(quickSortWithInsertionListHighK, 0, r, 1000);
+    long endTimeQuickSortWithInsertionHighK = System.currentTimeMillis();
+    System.out.println("QUICKSORT-WITH-INSERTION: " + (endTimeQuickSortWithInsertionHighK - startTimeQuickSortWithInsertionHighK + "ms with k at 1000 for " + fileName));
+    System.out.println("Is sorted: " + isSorted(quickSortWithInsertionListHighK));
 
     //3-WAY-QUICKSORT
     int[] quickSortThreeWayList = Arrays.copyOf(originaFile, originaFile.length);
@@ -45,18 +59,7 @@ public static void main(String[] args) throws Exception {
     System.out.println("3-WAY-QUICKSORT: " + (endTimeQuickSortThreeWay - startTimeQuickSortThreeWay) + "ms for " + fileName);
     System.out.println("Is sorted: " + isSorted(quickSortThreeWayList));
 
-    //INSERTION-SORT
-    int[] insertionSortList = Arrays.copyOf(originaFile, originaFile.length);
-    long startTimeInsertionSort = System.currentTimeMillis();
-    //Part 2, setting an appropriate cut-off time
-    while(System.currentTimeMillis() < startTimeInsertionSort+5000){
-        sort.insertionSort(insertionSortList, 0, r);
-    }
-    long endTimeInsertionSort = System.currentTimeMillis();
-    System.out.println("Insertion Sort: " + (endTimeInsertionSort - startTimeInsertionSort) + "ms for " + fileName);
-    System.out.println("Is sorted: " + isSorted(insertionSortList));
-
-    //SHELL-SORT
+    //SHELL-SORT 
     int[] shellSortList = Arrays.copyOf(originaFile, originaFile.length);
     long startTimeShellSort = System.currentTimeMillis();
     sort.shellSort(shellSortList);
@@ -68,13 +71,24 @@ public static void main(String[] args) throws Exception {
     int[] selectionSortList = Arrays.copyOf(originaFile, originaFile.length);
     long startTimeSelectionSort = System.currentTimeMillis();
     //Part 2, setting an appropriate cut-off time
-    while(System.currentTimeMillis()<startTimeSelectionSort+5000){
+    while(System.currentTimeMillis()<startTimeSelectionSort+10000){
         sort.selectionSort(selectionSortList);
     }
     long endTimeSelectionSort = System.currentTimeMillis();
     System.out.println("Selection Sort: " + (endTimeSelectionSort - startTimeSelectionSort) + "ms for " + fileName);
     System.out.println("Is sorted: " + isSorted(selectionSortList));
 
+
+    //INSERTION-SORT
+    int[] insertionSortList = Arrays.copyOf(originaFile, originaFile.length);
+    long startTimeInsertionSort = System.currentTimeMillis();
+    //Part 2, setting an appropriate cut-off time
+    while(System.currentTimeMillis() < startTimeInsertionSort+10000){
+        sort.insertionSort(insertionSortList, 0, r);
+    }
+    long endTimeInsertionSort = System.currentTimeMillis();
+    System.out.println("Insertion Sort: " + (endTimeInsertionSort - startTimeInsertionSort) + "ms for " + fileName);
+    System.out.println("Is sorted: " + isSorted(insertionSortList));
 
     //MERGE-SORT
     int[] mergeSortList = Arrays.copyOf(originaFile, originaFile.length);

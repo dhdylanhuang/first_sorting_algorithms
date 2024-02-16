@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "PartThree",
+            "request": "launch",
+            "mainClass": "PartThree",
+            "projectName": "ads2_assessed_exercise_1_66900ae6"
+        },
+        {
+            "type": "java",
             "name": "GFG",
             "request": "launch",
             "mainClass": "GFG",
