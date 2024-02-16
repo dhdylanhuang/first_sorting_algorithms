@@ -1,4 +1,4 @@
-public class QuickSort {
+public class QuickSort extends SortingAlgorithms {
 
     //Part 1 c)
     static int gtPivot = 0; 
@@ -37,20 +37,6 @@ public class QuickSort {
             quickSortThreeWay(arr, pivotIndex[1], high);
         }
         return arr;
-    }
-
-
-    //Part 1 b) INSERTION-SORT 
-    public void insertionSort(int[] arr, int low, int high) {
-        for (int i = low + 1; i <= high; i++) {
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= low && arr[j] > key) {
-                arr[j+1] = arr[j];
-                j--;
-            }
-            arr[j+1] = key;
-        }
     }
 
     //Part 1 a) PARTITION
@@ -122,12 +108,5 @@ public class QuickSort {
         }
 
         return new int[] {ltPivot, gtPivot};
-    }
-    
-
-    public void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
     }
 }
